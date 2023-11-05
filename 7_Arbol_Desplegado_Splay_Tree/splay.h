@@ -125,7 +125,6 @@ Node<T>* Node<T>::remove(T val){
                 }
                 left = succesorNode;
                 delete oldNode;
-                return this;
             } else{
                 return left->remove(val);
             }
@@ -151,12 +150,12 @@ Node<T>* Node<T>::remove(T val){
 				}
                 right = succesorNode;
                 delete oldNode;
-                return this;
 			} else{
 				return right->remove(val);
 			}
         }
     }
+    return this;
 }
 
 template<typename T>
