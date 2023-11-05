@@ -45,12 +45,14 @@ Node<T>* Node<T>::add(T val){
             return left->add(val);
         } else{
             left = new Node<T>(val, nullptr, nullptr, this);
+            return left;
         }
     } else if(val > value){
         if(right != nullptr){
             return right->add(val);
         } else{
             right = new Node<T>(val, nullptr, nullptr, this);
+            return right;
         }
     }
     return this;
@@ -108,8 +110,11 @@ Node<T>* Node<T>::remove(T val){
                 oldNode = left;
                 succesorNode = oldNode->succesor();
                 if(succesorNode){
-                    succesorNode->left = oldNode->left;
-                    succesorNode->right = oldNode->right;
+                    if(oldNode->left != succesorNode){
+                        succesorNode->left = oldNode->left;
+                    } else if(oldNode->right != succesorNode){
+                        succesorNode->right = oldNode->right;
+                    }         
                     if(succesorNode->left){
                         succesorNode->left->parent = succesorNode;
                     }
@@ -131,8 +136,11 @@ Node<T>* Node<T>::remove(T val){
 				oldNode = right;
 				succesorNode = oldNode->succesor();
 				if(succesorNode){
-					succesorNode->left = oldNode->left;
-					succesorNode->right = oldNode->right;
+					if(oldNode->left != succesorNode){
+                        succesorNode->left = oldNode->left;
+                    } else if(oldNode->right != succesorNode){
+                        succesorNode->right = oldNode->right;
+                    }
                     if(succesorNode->left){
                         succesorNode->left->parent = succesorNode;
                     }
@@ -226,9 +234,9 @@ Node<T>* Node<T>::splay(Node<T>* root, Node<T>* x){
             } else if(g->right && p->left && g->right == p && p->left == x){
                 rot_right(p);
                 rot_left(g);
-            } else{
-                rot_left(g);
-                rot_right(p);
+            } else if(g->left && p->right && g->left == p && p->right == x){
+                rot_left(p);
+                rot_right(g);
             }
         }
     }
