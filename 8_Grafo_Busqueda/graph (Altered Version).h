@@ -37,7 +37,7 @@ private:
 public:
 		Graph();
 		Graph(int);
-  		void loadGraphList(string, int, int);
+  		void loadGraphList(string, int);
   		void loadGraphMat(string, int, int);
 		void addEdgeAdjList(int, int);
 		void addEdgeAdjMatrix(int, int);
@@ -54,11 +54,12 @@ public:
 };
 
 
-void Graph::loadGraphList(string file, int numberVert, int numberEdg){
+void Graph::loadGraphList(string file, int numberVert){
 	adjList = new vector<int>[numberVert];
 	nodes = numberVert;
 
 	string line;
+	// file = file + ".txt";
 	ifstream dataFile(file);
 
 	int u, v;
@@ -83,6 +84,7 @@ void Graph::loadGraphMat(string name, int a, int b){
 		adjMatrix[i] = 0;
 	}
 	string line;
+	// name = name + ".txt";
 	ifstream lee (name);
 	int u, v;
 	if (lee.is_open()){
@@ -155,9 +157,11 @@ string Graph::DFS(int start, int goal){
 	return depthHelper(start, goal, stck, visited, paths);
 }
 
-string Graph::depthHelper(int current, int goal, stack<int> &stck, list<int> &visited, vector<vector <int> > &paths){
-
-
+string Graph::depthHelper(int current,
+	int goal,
+	stack<int> &stck,
+	list<int> &visited,
+	vector<vector <int> > &paths){
 	return "";
 }
 
@@ -169,32 +173,12 @@ string Graph::breadthHelper(int, int, queue<int>&, list<int>&, vector<vector<int
 	return "";
 }
 
-string Graph::print_visited(list<int> q){
-	stringstream aux;
-	aux << "visited: ";
-	while (!q.empty()){
-    aux << q.front() << " ";
-    q.pop_front();
-  }
-	return aux.str();
+string Graph::print_visited(list<int>){
+	return "";
 }
 
-string Graph::print_path(vector<vector <int> > &path, int start, int goal){
-	int node =  path[goal][0];
-	stack<int> reverse;
-	reverse.push(goal);
-	stringstream aux;
-	aux  << "path:";
-	while (node != start) {
-		reverse.push(node);
-    node = path[node][0];
-  }
-	reverse.push(start);
-	while (!reverse.empty()) {
-		aux << " " << reverse.top() ;
-		reverse.pop();
-  }
-	return aux.str();
+string Graph::print_path(vector<vector<int> >&,int ,int){
+	return "";
 }
 
 bool Graph::contains(list<int> ls, int node){
