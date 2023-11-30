@@ -1,14 +1,3 @@
-/*
-*  autor: Benjamin Valdes Aguirre
-*  fecha: Diciembre 2020
-*  programa: act 4.1 Implementacion Grafos
-*  desc: estos programas son solciones parciales a algunos de
-*  las actividades planteadas en el curso TC1031
-*
-*		Nota: Esta imlpementación es Top Down, no divide al árbol para la operacións
-*		de barrado
-*/
-
 #ifndef Graph_H_
 #define Graph_H_
 
